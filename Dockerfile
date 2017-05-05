@@ -21,7 +21,6 @@ RUN chmod +x /usr/bin/shiny-server.sh
 
 # now to the R part...
 
-
 # first we need devtools for all the installation of all further packages
 RUN R -e 'install.packages("devtools", repos = "http://cloud.r-project.org/")'
 
@@ -67,10 +66,10 @@ RUN perl -MCPAN -e 'CPAN::Shell->install("Bundle::CPAN")'
 RUN perl -MCPAN -e 'CPAN::Shell->install("LWP::UserAgent")'
 
 # deploy indexexplorer 
-COPY ./xxx /srv/shiny-server/xxx/
+#COPY ./xxx /srv/shiny-server/xxx/
 
 # we will run the shiny app as user 
-RUN chown -R shiny:shiny /srv/shiny-server/xxx
+#RUN chown -R shiny:shiny /srv/shiny-server/xxx
 
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
