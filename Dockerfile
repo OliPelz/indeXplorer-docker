@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y  \
     sudo \
     git \
     libssl-dev \
+    libcairo2-dev \
+    libxt-dev \
     gdebi
     
 # install the shiny server debian package from r-studio
@@ -37,6 +39,7 @@ RUN R -e 'source("http://bioconductor.org/biocLite.R");biocLite("org.Mm.eg.db")'
 RUN R -e 'source("http://bioconductor.org/biocLite.R");biocLite("org.Dm.eg.db")'
 
 # to install R packages from CRAN
+RUN R -e 'devtools::install_version("shiny", version = "1.0.3", repos = "http://cloud.r-project.org/")'
 RUN R -e 'devtools::install_version("pheatmap", version = "1.0.8", repos = "http://cloud.r-project.org/")'
 RUN R -e 'devtools::install_version("RColorBrewer", version = "1.1-2", repos = "http://cloud.r-project.org/")'
 RUN R -e 'devtools::install_version("sendmailR", version = "1.2-1", repos = "http://cloud.r-project.org/")'
@@ -48,7 +51,7 @@ RUN R -e 'devtools::install_version("colorRamps", version = "2.3", repos = "http
 RUN R -e 'devtools::install_version("ggplot2", version = "2.2.1", repos = "http://cloud.r-project.org/")'
 RUN R -e 'devtools::install_version("BMS", version = "0.3.4", repos = "http://cloud.r-project.org/")'
 RUN R -e 'devtools::install_version("reshape2", version = "1.4.2", repos = "http://cloud.r-project.org/")'
-RUN R -e 'devtools::install_version("shiny", version = "1.0.3", repos = "http://cloud.r-project.org/")'
+
 
 # to install R packages from github
 RUN R -e 'devtools::install_github("hms-dbmi/scde", ref = "5049863")'
