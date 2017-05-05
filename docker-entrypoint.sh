@@ -2,7 +2,7 @@
 
 set -e
 
-_CFG=/srv/shiny-server/xxx/config.r
+_CFG=/srv/shiny-server/indeXplorer/global.R
 
 # subs definition go here
 
@@ -13,8 +13,15 @@ _CFG=/srv/shiny-server/xxx/config.r
 key_value_to_cfg() {
         local key="$1"
         local value="$2"
-        sed -i  's#^config\[\["'$key'"\]\] <-.*$#config\[\["'$key'"\]\] <- '$value'#g' "$3"
+        sed -i  "'s#^$key[:blank:]*<-.*#$key <- $value#g'" "$3"
 }
+
+# sub to change values of vars defined in a R shiny global.R function
+key_value_to_global_r() {                                                                           
+        local key="$1"                                                                         
+        local value="$2"                                                                       
+        sed -i  "s#^$key.*<-.*#$key <- $value#g" "$3"                                
+}   
 
 # end of subs definitions
 
@@ -35,9 +42,9 @@ if [ "$1" = 'start-app' ]; then
      # enable full debugging output for the shiny server
      sed -i.bak.verbose 's#exec shiny-server\(.*\)#export SHINY_LOG_LEVEL=TRACE\nexec shiny-server \1#g' /usr/bin/shiny-server.sh
   fi 
-  if [ "$CUSTOM_KEY" ]; then
-    echo "[CUSTOM] setting the path to the CUSTOM_KEY"  
-    key_value_to_cfg "BLABLABLA" "\"$CUSTOM_KEY\"" "$_CFG"
+  if [ "$SPECIES" ]; then
+    echo "[CUSTOM] setting the species to $SPECIES"  
+    key_value_to_global_r "SPECIES" "\"$SPECIES\"" "$_CFG"
   fi
   if [ "$ANOTHER_CUSTOM_KEY" ]; then
     echo "[CUSTOM] JUST BLA"

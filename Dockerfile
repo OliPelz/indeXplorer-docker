@@ -69,10 +69,16 @@ RUN perl -MCPAN -e 'CPAN::Shell->install("Bundle::CPAN")'
 RUN perl -MCPAN -e 'CPAN::Shell->install("LWP::UserAgent")'
 
 # deploy indexexplorer 
-#COPY ./xxx /srv/shiny-server/xxx/
+COPY ./indeXplorer /srv/shiny-server/indeXplorer/
+# here will be the file location for the indeXplorer files
+RUN mkdir ./data
+# adjust the global.R config file to point to this new location
+RUN sed -i  "s#^DATAFOLDER <-.*#DATAFOLDER <- '/data'#g" /srv/shiny-server/indeXplorer/global.R 
+
+
 
 # we will run the shiny app as user 
-#RUN chown -R shiny:shiny /srv/shiny-server/xxx
+RUN chown -R shiny:shiny /srv/shiny-server/indeXplorer
 
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
