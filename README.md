@@ -58,3 +58,7 @@ e.g.
 docker run --rm -p 80:3838 -e verbose_logfiles=TRUE -v $DATA_DIR:/data indeXplorer
 
 ```
+behind a webproxy use the following
+```
+websockets_behind_proxy=TRUE
+```
