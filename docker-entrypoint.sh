@@ -17,10 +17,10 @@ key_value_to_cfg() {
 }
 
 # sub to change values of vars defined in a R shiny global.R function
-key_value_to_global_r() {                                                                           
-        local key="$1"                                                                         
-        local value="$2"                                                                       
-        sed -i  "s#^$key.*<-.*#$key <- $value#g" "$3"                                
+key_value_to_global_r() {
+	local key="$1"
+	local value="$2"
+	sed -i  "s#^$key.*<-.*#$key <- $value#g" "$3"
 }   
 
 # end of subs definitions
@@ -48,15 +48,15 @@ if [ "$1" = 'start-app' ]; then
   fi
   if [ "$DEFAULT_SCALE_X" ]; then
     echo "[CUSTOM] setting DEFAULT_SCALE_X to $DEFAULT_SCALE_X"
-    key_value_to_cfg "DEFAULT_SCALE_X" "\"$DEFAULT_SCALE_X\"" "$_CFG"
+    key_value_to_global_r "DEFAULT_SCALE_X" "\"$DEFAULT_SCALE_X\"" "$_CFG"
   fi
   if [ "$DEFAULT_SCALE_Y" ]; then
     echo "[CUSTOM] setting DEFAULT_SCALE_Y to $DEFAULT_SCALE_Y"
-    key_value_to_cfg "DEFAULT_SCALE_Y" "\"$DEFAULT_SCALE_Y\"" "$_CFG"
+    key_value_to_global_r "DEFAULT_SCALE_Y" "\"$DEFAULT_SCALE_Y\"" "$_CFG"
   fi
   if [ "$ANOTHER_CUSTOM_KEY" ]; then
     echo "[CUSTOM] JUST BLA"
-    key_value_to_cfg "BLABLA2" "\"$ANOTHER_CUSTOM_KEY\"" "$_CFG"
+    key_value_to_global_r "BLABLA2" "\"$ANOTHER_CUSTOM_KEY\"" "$_CFG"
   fi
   exec /usr/bin/shiny-server.sh
 fi
