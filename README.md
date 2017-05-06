@@ -62,3 +62,21 @@ behind a webproxy use the following
 ```
 websockets_behind_proxy=TRUE
 ```
+
+e.g.
+```
+docker run --rm -p 80:3838 -e verbose_logfiles=TRUE -e websockets_behind_proxy=TRUE -v $DATA_DIR:/data indeXplorer
+
+```
+set DEFAULT_SCALE_X and/or DEFAULT_SCALE_Y to e.g. linear
+```
+DEFAULT_SCALE_X=linear
+DEFAULT_SCALE_Y=linear
+```
+
+e.g.
+```
+docker run --rm -p 80:3838 -e verbose_logfiles=TRUE -e websockets_behind_proxy=TRUE -e DEFAULT_SCALE_X=linear -e DEFAULT_SCALE_Y=linear -v $DATA_DIR:/data indeXplorer
+
+```
+

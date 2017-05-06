@@ -46,6 +46,14 @@ if [ "$1" = 'start-app' ]; then
     echo "[CUSTOM] setting the species to $SPECIES"  
     key_value_to_global_r "SPECIES" "\"$SPECIES\"" "$_CFG"
   fi
+  if [ "$DEFAULT_SCALE_X" ]; then
+    echo "[CUSTOM] setting DEFAULT_SCALE_X to $DEFAULT_SCALE_X"
+    key_value_to_cfg "DEFAULT_SCALE_X" "\"$DEFAULT_SCALE_X\"" "$_CFG"
+  fi
+  if [ "$DEFAULT_SCALE_Y" ]; then
+    echo "[CUSTOM] setting DEFAULT_SCALE_Y to $DEFAULT_SCALE_Y"
+    key_value_to_cfg "DEFAULT_SCALE_Y" "\"$DEFAULT_SCALE_Y\"" "$_CFG"
+  fi
   if [ "$ANOTHER_CUSTOM_KEY" ]; then
     echo "[CUSTOM] JUST BLA"
     key_value_to_cfg "BLABLA2" "\"$ANOTHER_CUSTOM_KEY\"" "$_CFG"
