@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y  \
     libssl-dev \
     libcairo2-dev \
     libxt-dev \
+    libxml2-dev \
+    libgsl0-dev \
     gdebi
     
 # install the shiny server debian package from r-studio
@@ -73,7 +75,7 @@ COPY ./indeXplorer /srv/shiny-server/indeXplorer/
 # here will be the file location for the indeXplorer files
 RUN mkdir ./data
 # adjust the global.R config file to point to this new location
-RUN sed -i  "s#^DATAFOLDER <-.*#DATAFOLDER <- '/data'#g" /srv/shiny-server/indeXplorer/global.R 
+RUN sed -i  "s#^DATAFOLDER <-.*#DATAFOLDER <- \"/data\"#g" /srv/shiny-server/indeXplorer/global.R 
 
 
 

@@ -13,3 +13,36 @@ then build docker image
 ```bash
 docker build .
 ```
+
+in order we can run the web app, we need to put some data in a specific folder and
+define this folder as a docker run(time argument)
+
+for example define the following location on your host system
+```
+mkdir ~/indeXplorer_data
+DATA_DIR=~/indeXplorer_data
+```
+
+copy some example data in it
+```
+cd $DATA_DIR
+wget http://steinmetzlab.embl.de/shiny/indexplorer/data.zip
+unzip -j data.zip
+```
+
+now run the container defining the local folder (providing a local folder is mandantory, otherwise shiny will throw an error)
+```
+docker run --rm -p 80:3838 -v $DATA_DIR:/data indeXplorer
+```
+
+following options are defined on running docker
+
+verbose_logfiles creates extensive log files in ```/var/log/shiny-server```
+```
+verbose_logfiles=[TRUE,FALSE] 
+```
+e.g.
+```
+docker run --rm -p 80:3838 -e verbose_logfiles=TRUE -v $DATA_DIR:/data indeXplorer
+
+```
