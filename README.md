@@ -1,9 +1,15 @@
 # indeXplorer-docker
 
-temporary location for the dockerfile for indeXplorer
+temporary location for a dockerfile for indeXplorer
 
+first clone this git repo you see here
 
-first clone indeXplorer to this dir
+next change to this dir 
+```
+cd indeXplorer-docker
+```
+
+then clone indeXplorer inside the ```indeXplorer-docker``` dir using
 
 ```bash
 git clone https://git.embl.de/velten/indeXplorer.git
@@ -15,7 +21,7 @@ docker build .
 ```
 
 in order we can run the web app, we need to put some data in a specific folder and
-define this folder as a docker run(time argument)
+define this folder as a docker run(time)  argument
 
 for example define the following location on your host system
 ```
@@ -30,7 +36,12 @@ wget http://steinmetzlab.embl.de/shiny/indexplorer/data.zip
 unzip -j data.zip
 ```
 
-now run the container defining the local folder (providing a local folder is mandantory, otherwise shiny will throw an error)
+now run the container defining the local folder (providing a local folder is mandantory, otherwise the shiny webapp indeXplorer will throw an error when startin
+g)
+this is a test
+```
+if ! [ -f $DATA_DIR/MASTER_ALL.rda ]; then echo "mandantory file for indeXplorer not found!"; fi
+```
 ```
 docker run --rm -p 80:3838 -v $DATA_DIR:/data indeXplorer
 ```
