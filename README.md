@@ -38,10 +38,11 @@ unzip -j data.zip
 
 now run the container defining the local folder (providing a local folder is mandantory, otherwise the shiny webapp indeXplorer will throw an error when startin
 g)
-this is a test
+first do a  test
 ```
 if ! [ -f $DATA_DIR/MASTER_ALL.rda ]; then echo "mandantory file for indeXplorer not found!"; fi
 ```
+then run the app
 ```
 docker run --rm -p 80:3838 -v $DATA_DIR:/data indeXplorer
 ```
