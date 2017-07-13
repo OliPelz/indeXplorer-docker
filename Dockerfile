@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y  \
     libxt-dev \
     libxml2-dev \
     libgsl0-dev \
-    gdebi
+    gdebi \
+    libcurl4-openssl-dev
     
 # install the shiny server debian package from r-studio
 RUN wget --no-verbose "https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-1.5.3.838-amd64.deb" -O ss-latest.deb && \
